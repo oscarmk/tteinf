@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <ListaPuntos>
+    <Idioma>es</Idioma>
+    <Punto>
+      <Nombre>Achao</Nombre>
+      <Descripcion>Abierto en funcionamiento normal para todo tipo de naves sin restricción de navegación.</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.4371404453535</Latitud>
+        <Longitud>-73.5191345214844</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Ancud</Nombre>
+      <Descripcion>Cerrado para naves menores dentro y fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.873651269925</Latitud>
+        <Longitud>-73.7896728515625</Longitud>
+      </Coordenadas>
+      <Estado>Cerrado</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Ayacara</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.317488926262</Latitud>
+        <Longitud>-72.787140558202</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Calbuco</Nombre>
+      <Descripcion>Cerrado para naves menores fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.777080299146</Latitud>
+        <Longitud>-73.129798124272</Longitud>
+      </Coordenadas>
+      <Estado>Cerrado</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Caleta La Arena</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.692190126909</Latitud>
+        <Longitud>-72.642961094815</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Caleta Puelche</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.739038509366</Latitud>
+        <Longitud>-72.648180673558</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Castro</Nombre>
+      <Descripcion>Cerrado para naves menores fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.481473074052</Latitud>
+        <Longitud>-73.758662144381</Longitud>
+      </Coordenadas>
+      <Estado>Operativo con dificultades</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Chacao</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.829187300565</Latitud>
+        <Longitud>-73.515628526646</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Chaiten</Nombre>
+      <Descripcion>Cerrado para naves menores fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.911900186667</Latitud>
+        <Longitud>-72.718154142337</Longitud>
+      </Coordenadas>
+      <Estado>Operativo con dificultades</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Chonchi</Nombre>
+      <Descripcion>Abierto en funcionamiento normal para todo tipo de naves sin restricción de navegación.</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.6185493683297</Latitud>
+        <Longitud>-73.7832677364349</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Fiordo Largo</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.545810384063</Latitud>
+        <Longitud>-72.523503551919</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>La Pasada</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.605622631439</Latitud>
+        <Longitud>-73.598015426386</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Leptepu</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.48848560302</Latitud>
+        <Longitud>-72.436827967603</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Maullin</Nombre>
+      <Descripcion>Cerrado para naves menores fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.615262715079</Latitud>
+        <Longitud>-73.594595609851</Longitud>
+      </Coordenadas>
+      <Estado>Operativo con dificultades</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Melinka</Nombre>
+      <Descripcion>Cerrado para naves menores fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-43.898442904936</Latitud>
+        <Longitud>-73.748367826182</Longitud>
+      </Coordenadas>
+      <Estado>Operativo con dificultades</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Pargua</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.792834234037</Latitud>
+        <Longitud>-73.458937356907</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Puerto Aguirre</Nombre>
+      <Descripcion>Abierto para todo tipo de embarcaciones por tiempo normal.</Descripcion>
+      <Coordenadas>
+        <Latitud>-45.1549271336185</Latitud>
+        <Longitud>-73.5232543945312</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Puerto Chacabuco</Nombre>
+      <Descripcion>Abierto en funcionamiento normal para todo tipo de naves sin restricción de navegación.</Descripcion>
+      <Coordenadas>
+        <Latitud>-45.466168092576</Latitud>
+        <Longitud>-72.820961872775</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Puerto Montt</Nombre>
+      <Descripcion>Abierto en funcionamiento normal para todo tipo de naves sin restricción de navegación.</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.484899404943</Latitud>
+        <Longitud>-72.959534178214</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Puerto Varas</Nombre>
+      <Descripcion>Cerrado para naves menores fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.3252110459029</Latitud>
+        <Longitud>-72.969609896379</Longitud>
+      </Coordenadas>
+      <Estado>Operativo con dificultades</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Quellón</Nombre>
+      <Descripcion>Cerrado para naves menores dentro y fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-43.1419467495927</Latitud>
+        <Longitud>-73.6429798106733</Longitud>
+      </Coordenadas>
+      <Estado>Cerrado</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Quemchi</Nombre>
+      <Descripcion>Cerrado para naves menores fuera de la bahía por tiempo variable.</Descripcion>
+      <Coordenadas>
+        <Latitud>-42.145312389273</Latitud>
+        <Longitud>-73.47305918737</Longitud>
+      </Coordenadas>
+      <Estado>Operativo con dificultades</Estado>
+    </Punto>
+    <Punto>
+      <Nombre>Río Negro Hornopirén</Nombre>
+      <Descripcion>S/I</Descripcion>
+      <Coordenadas>
+        <Latitud>-41.97222761719</Latitud>
+        <Longitud>-72.472308228451</Longitud>
+      </Coordenadas>
+      <Estado>Abierto</Estado>
+    </Punto>
+  </ListaPuntos>
+  <ListaPuntos>
+    <Idioma>en</Idioma>
+  </ListaPuntos>
+</xml>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>TransporTeinforma </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <link type="text/css" rel="stylesheet" href="css/tteinf.css" />
+            
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
+            
+            <script type="text/javascript" src="js/jquery.js"></script>
+            <!--<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>-->
+            <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+            <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+            
+            
+            
+            <script type="text/javascript" >
+                
+                function getMapa(){
+                    
+                    xmlhttp=new XMLHttpRequest();
+                    
+                    xmlhttp.open("GET","xml/mapamaritimo.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+                    
+                    document.write("<head>");
+                    document.write("<meta charset='utf-8'/>");
+                    
+                    document.write("<meta name='viewport' content='width=device-width,user-scalable=no'>");
+                    document.write("<link type='text/css' rel='stylesheet' href='css/tteinf.css' />");
+                    document.write("\x3Cscript type='text/javascript' src='js/jquery.js'>\x3C/script>");
+                    document.write("\x3Cscript type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'>\x3C/script>");
+                    
+                    document.write("\x3Cscript type='text/javascript' src='js/jquery.mobile-1.3.1.min.js'>\x3C/script>");
+                    document.write("</head>");
+                    
+                    document.write("<body class='ui-mobile-viewport'>");
+                    document.write("<div data-role='page' align='center' id='listmap' data-add-back-btn=true>");
+                    document.write("<div data-role='header' data-theme='b' class='ui-header ui-bar-b' >");
+                    document.write("<h1 class='ui-title' role='heading' aria-level='1'>Incidencias</h1>");
+                    document.write('<a href="javascript:void(0);" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-b" data-rel="back" data-icon="arrow-l" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner"><span class="ui-btn-text">Back</span><span class="ui-icon ui-icon-arrow-l ui-icon-shadow">&nbsp;</span></span></a>');
+                    document.write("</div>");
+                    
+                    document.write("<div data-role='content' align='center' data-theme='c' class='ui-content ui-body-c'>");
+                    document.write("<div data-role='collapsible-set'>");
+                    
+                    var x=xmlDoc.getElementsByTagName("Punto");
+                    for (i=0;i<x.length;i++)
+                    {
+                        document.write("<div data-role='collapsible-set'>");
+                        var tit=x[i].getElementsByTagName("Nombre")[0].childNodes[0].nodeValue;
+                        
+                        document.write('<a href="javascript:getArgsMaps('+i+')" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><span class="ui-btn-text" title="Puerto '+i+'">'+tit+'</a>');
+                        document.write("</div>");
+                    }
+                    
+                    document.write("</div>");
+                    document.write("</div>");
+                    document.write("<div data-role='footer' data-theme='b' align='center' data-position='fixed' data-id='footer2' class='ui-footer ui-bar-b ui-footer-fixed slideup'>");
+                    document.write("<h2 class='ui-title' role='heading' aria-level='1'>TransporTeinforma</h2>");
+                    document.write("<h2class='ui-title' role='heading' aria-level='1'>Los Lagos</h2>");
+                    document.write("</div>");
+                    document.write("</div>");
+                    document.write("</body>");
+                    
+                    
+                }
+                
+                function getArgsMaps(i){
+                    xmlhttp=new XMLHttpRequest();
+                    
+                    xmlhttp.open("GET","xml/mapamaritimo.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+                    
+                    var x=xmlDoc.getElementsByTagName("Punto");
+                    document.write("<div align='center' data-role='collapsible' data-theme='c' class='ui-content ui-body-c'>");
+                    var lat=x[i].getElementsByTagName("Latitud")[0].childNodes[0].nodeValue;
+                    var lon=x[i].getElementsByTagName("Longitud")[0].childNodes[0].nodeValue;
+                    document.write("<h2 class='ui-title' role='heading' aria-level='1'>");
+                    document.write(x[i].getElementsByTagName("Nombre")[0].childNodes[0].nodeValue);
+                    document.write("</h2>");
+                    document.write("<h3 class='ui-title' role='heading' aria-level='1'> ESTADO: ");
+                    document.write(x[i].getElementsByTagName("Estado")[0].childNodes[0].nodeValue);
+                    document.write("</h3>");
+                    document.write(x[i].getElementsByTagName("Descripcion")[0].childNodes[0].nodeValue +"<br />" +"<br />");
+                    document.write('<iframe width="250" height="250" src="http://maps.google.cl/maps?q='+lat+','+lon+	'&amp;t=h&amp;ie=UTF8&amp;z=14&amp;output=embed"></iframe> <br/> <br/> <br/> <br/>');
+                    document.write("</div>");
+                    
+                }
+                
+                function getEventos(){
+                    
+                    xmlhttp=new XMLHttpRequest();
+                    
+                    xmlhttp.open("GET","xml/eventos.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+                    
+                    document.write("<head>");
+                    document.write("<meta charset='utf-8'/>");
+                    
+                    document.write("<meta name='viewport' content='width=device-width,user-scalable=no'>");
+                    document.write("<link type='text/css' rel='stylesheet' href='css/tteinf.css' />");
+                    document.write("\x3Cscript type='text/javascript' src='js/jquery.js'>\x3C/script>");
+                    document.write("\x3Cscript type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'>\x3C/script>");
+                    
+                    document.write("\x3Cscript type='text/javascript' src='js/jquery.mobile-1.3.1.min.js'>\x3C/script>");
+                    document.write("</head>");
+                    
+                    document.write("<body class='ui-mobile-viewport'>");
+                    document.write("<div data-role='page' align='center' id='event' data-add-back-btn=true>");
+                    document.write("<div data-role='header' data-theme='b' class='ui-header ui-bar-b'> ");
+                    document.write("<h1 class='ui-title' role='heading' aria-level='1'>Incidencias</h1>");
+                    document.write("<a href='#inicio' data-theme='a'> Inicio </a>");
+                    document.write("</div>");
+                    
+                    
+                    
+                    document.write("<div data-role='content' align='center' data-theme='c' class='ui-content ui-body-c'>");
+                    document.write("<div data-role='collapsible-set'>");
+                    
+                    var x=xmlDoc.getElementsByTagName("Incidencia");
+                    for (i=0;i<x.length;i++)
+                    {
+                        document.write("<div data-role='collapsible-set'>");
+                        var tit=x[i].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue;
+                        
+                        document.write('<a href="javascript:getArgsEvent('+i+')" data-role="button" data-rel="dialog" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><span class="ui-btn-text" title="Incidencia '+i+'">'+tit+'</a>');
+                        
+                        document.write("</div>");
+                    }
+                    
+                    document.write("</div>");
+                    document.write("</div>");
+                    document.write("<div data-role='footer' data-theme='b' align='center' data-position='fixed' data-id='footer2' class='ui-footer ui-bar-b ui-footer-fixed slideup'>");
+                    document.write("<h2 class='ui-title' role='heading' aria-level='1'>TransporTeinforma</h2>");
+                    document.write("<h2class='ui-title' role='heading' aria-level='1'>Los Lagos</h2>");
+                    document.write("</div>");
+                    document.write("</div>");
+                    document.write("</body>");
+                    
+                }
+                
+                function getArgsEvent(i){
+                    
+                    xmlhttp=new XMLHttpRequest();
+                    
+                    xmlhttp.open("GET","xml/eventos.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+                    var x=xmlDoc.getElementsByTagName("Incidencia");
+                    document.write('<div data-role="page" data-theme="b" id="comentarios" >');
+                    document.write("<div align='center' data-role='collapsible' data-theme='c' class='ui-content ui-body-c'>");
+                    var lat=x[i].getElementsByTagName("Latitud")[0].childNodes[0].nodeValue;
+                    var lon=x[i].getElementsByTagName("Longitud")[0].childNodes[0].nodeValue;
+                    var text=x[i].getElementsByTagName("Texto")[0].childNodes[0].nodeValue;
+                    document.write("<h2 class='ui-title' role='heading' aria-level='1'>");
+                    document.write(x[i].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue);
+                    document.write("</h2>");
+                    document.write("<h4 class='ui-title' role='heading' aria-level='1'>");
+                    document.write(x[i].getElementsByTagName("Subtitulo")[0].childNodes[0].nodeValue);
+                    document.write("</h4>");
+                    document.write("<h4 class='ui-title' role='heading' aria-level='1'> TIPO: ");
+                    document.write(x[i].getElementsByTagName("Categoría")[0].childNodes[0].nodeValue);
+                    document.write("</h4>");
+                    document.write(x[i].getElementsByTagName("Texto")[0].childNodes[0].nodeValue);
+                    document.write('<iframe width="250" height="250" src="http://maps.google.cl/maps?q='+lat+','+lon+	'&amp;t=h&amp;ie=UTF8&amp;z=14&amp;output=embed"></iframe>');
+                    document.write("<br /> Inicio: "+ x[i].getElementsByTagName("FechaInicio")[0].childNodes[0].nodeValue +"<br /> Fin: ", x[i].		getElementsByTagName("FechaFin")[0].childNodes[0].nodeValue +"<br /> Acualizado: ", x[i].getElementsByTagName("FechaActualizacion")[0].childNodes[0].nodeValue +"<br />" +"<br />" +"<br />"+"<br />");
+                    document.write("</div>");
+                    document.write("</div>");
+                }
+                
+                </script>
+            </head>
+    
+    <body>
+        
+        <div data-role="page" data-theme="d" id="inicio" >
+            
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <h1>Bienvenido</h1>
+            </div>
+            
+            <div data-role="content" align="center" data-theme="d" >
+                <img src="img/tteLogo2.png" alt"tte" width="300" height="100"/>
+                <h4>Seleccione su idioma: <br> Select your language:</h4>
+                
+                <div data-role="popup" id="bienvenida" align="center">
+                    <h2>Gracias por informarse con transporTeinforma Los Lagos</h2>
+                    <p>Le damos la bienvenida a este servicio móvil y esperamos le sea de utilidad<p>
+                    <a href="#main"> Continuar</a>
+                </div>
+                
+                <div data-role="popup" id="welcome" align="center">
+                    <h2>Thanks for download transporTeinforma Los Lagos</h2>
+                    <p>Welcome to this App<p>
+                    <a href="#mainEn"> Continue</a>
+                </div>
+                
+                
+                <ul data-role="listview" data-inset="true">
+                    <li> <a  href="#bienvenida" data-rel="popup" data-transition="flip"> Español </a></li>
+                    <li> <a href="#welcome" data-rel="popup" data-transition="flip"> English </a></li>
+                </ul>
+            </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer0">
+                <h2>transporTeinforma</h2>
+                <h2>Los Lagos</h2>
+            </div>
+        </div>
+        
+        
+        <div data-role="page" data-theme="d" id="main" data-add-back-btn=true data-back-btn-text="A">
+            
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <!--width=320, height=45-->
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#"  onclick="getEventos()">Incidencias</a> </li>
+                        <li> <a href="#notipag">Notificar</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <img src="img/flecha.png" alt"Flecha" width="70" height="60"/>
+                <h3>Lista de Incidencias</h3>
+                <p>En esta sección encontrará las incidencias ocurridas en el transporte de la X región de Los Lagos<p>
+                <h3>Notificar Incidencia</h3>
+                <p>Además podrá notificar una incidencia evidenciada por usted<p>
+                
+                <div data-theme="d" id="showevents">
+                    <button href="#" data-icon="alert" data-iconpos="right" onclick="showPos(2)">TestPos*</button>
+                    <XML id="id" src="xml/eventos.xml"></XML>
+                    <object id="obje" CLASSID="clsid:550dda30-0541-11d2-9ca9-0060b0ec3d39"
+                        width="0" height="0">
+                    </object>
+                    
+                </div>
+                
+                <script>
+                    
+                    
+                    
+                    function showPos(i)
+                    {
+                        xmlhttp=new XMLHttpRequest();
+                        
+                        xmlhttp.open("GET","xml/eventos.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        var x=xmlDoc.getElementsByTagName("Incidencia");
+                        var tit=x[i].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue;
+                        
+                        document.write('<a href="javascript:getArgsEvent('+i+')" data-role="button">'+tit+'</a>');
+                        lat=x[i].getElementsByTagName("Latitud")[0].childNodes[0].nodeValue;
+                        lon=x[i].getElementsByTagName("Longitud")[0].childNodes[0].nodeValue;
+                        latlon=new google.maps.LatLng(lat, lon)
+                        mapholder=document.getElementById('showevents')
+                        mapholder.style.height='240px';
+                        mapholder.style.width='260px';
+                        
+                        var myOptions={
+                            center:latlon,zoom:14,
+                            mapTypeId:google.maps.MapTypeId.ROADMAP,
+                            mapTypeControl:false,
+                            navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+                        };
+                        var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+                        var marker=new google.maps.Marker({position:latlon,map:map,title:"Incidencia"});
+                    }
+                    
+                    
+                    </script>
+                
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b"  data-position="fixed" data-id="footer1">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" class="ui-btn-active ui-state-persist"> Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div data-role="page" data-theme="d" id="notipag" data-add-back-btn=true data-back-btn-text="A">
+            
+            <div data-role="header" data-position="fixed" data-theme="b" >
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#" onclick="getEventos()">Incidencias</a> </li>
+                        <li> <a href="#notipag" class="ui-btn-active ui-state-persist">Notificar</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <h3>Notificar Incidencia:</h3>
+                <p>Todas las incidencias notificadas por usuarios, una vez ingresadas serán revisadas por los profesionales de <a href="http://www.loslagos.transporteinforma.cl" >transporTeinforma Los Lagos</a> para luego informarlas a la población<p>
+                
+                <ul data-role="listview" data-inset="true">
+                    <li> <a href="#notificacion" data-icon="arrow-l" onclick="getLocation()" data-rel="dialog"> Accidente </a> </li>
+                    <li> <a href="#notificacion" data-icon="arrow-l" onclick="getLocation()"  data-rel="dialog"> Trafico lento </a> </li>
+                    <li> <a href="#notificacion" data-icon="arrow-l" onclick="getLocation()" data-rel="dialog"> Trabajos en la vía </a> </li>
+                    <li> <a href="#notificacion" data-icon="arrow-l" onclick="getLocation()" data-rel="dialog"> Otro </a> </li>
+                </ul>
+            </div>
+            
+            <div data-role="footer" data-theme="b"  data-position="fixed" data-id="footer11">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" class="ui-btn-active ui-state-persist"> Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="notificacion">
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <h2>Notificar</h2>
+            </div>
+            
+            <div data-role="content" data-theme="d">
+                <div id="mapholder"></div>
+                <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                <script>
+                    var x=document.getElementById("demo");
+                    function getLocation()
+                    {
+                        if (navigator.geolocation)
+                        {
+                            navigator.geolocation.getCurrentPosition(showPosition,showError);
+                        }
+                        else{x.innerHTML="Geolocation is not supported by this browser.";}
+                    }
+                    
+                    function showPosition(position)
+                    {
+                        lat=position.coords.latitude;
+                        lon=position.coords.longitude;
+                        latlon=new google.maps.LatLng(lat, lon)
+                        mapholder=document.getElementById('mapholder')
+                        mapholder.style.height='240px';
+                        mapholder.style.width='260px';
+                        
+                        var myOptions={
+                            center:latlon,zoom:14,
+                            mapTypeId:google.maps.MapTypeId.ROADMAP,
+                            mapTypeControl:false,
+                            navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+                        };
+                        var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+                        var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+                    }
+                    
+                    function showError(error)
+                    {
+                        switch(error.code)
+                        {
+                            case error.PERMISSION_DENIED:
+                            x.innerHTML="User denied the request for Geolocation."
+                            break;
+                            case error.POSITION_UNAVAILABLE:
+                            x.innerHTML="Location information is unavailable."
+                            break;
+                            case error.TIMEOUT:
+                            x.innerHTML="The request to get user location timed out."
+                            break;
+                            case error.UNKNOWN_ERROR:
+                            x.innerHTML="An unknown error occurred."
+                            break;
+                        }
+                    }
+                    </script>
+                
+                <h3>Ingrese Notificación</h3>
+                <textarea name="comentarios" rows="10" cols="40" placeholder="Escriba aquí su notificación" required></textarea>
+                
+                <h4>Adjuntar Foto</h4>
+                
+                <div class="hiddenfile">
+                    <input type="file"  data-clear-btn="false" name="image" accept="image/*" capture>
+                        </div>
+                <div id="preview">
+                </div>
+                <ul id="info" data-role="listview" data-inset="true">
+                </ul>
+                <script>
+                    $('#page').on('pageinit', function(){
+                                  $("#chooseFile").click(function(e){
+                                                         e.preventDefault();
+                                                         $("input[type=file]").trigger("click");
+                                                         });
+                                  $("input[type=file]").change(function(){
+                                                               var file = $("input[type=file]")[0].files[0];
+                                                               $("#preview").empty();
+                                                               displayAsImage3(file, "preview");
+                                                               
+                                                               $info = $("#info");
+                                                               $info.empty();
+                                                               if (file && file.name) {
+                                                               $info.append("<li>name:<span>" + file.name + "</span></li>");
+                                                               }
+                                                               if (file && file.type) {
+                                                               $info.append("<li>size:<span>" + file.type + " bytes</span></li>");
+                                                               }
+                                                               if (file && file.size) {
+                                                               $info.append("<li>size:<span>" + file.size + " bytes</span></li>");
+                                                               }
+                                                               if (file && file.lastModifiedDate) {
+                                                               $info.append("<li>lastModifiedDate:<span>" + file.lastModifiedDate + " bytes</span></li>");
+                                                               }
+                                                               $info.listview("refresh");
+                                                               });
+                                  });
+                    
+                    function displayAsImage3(file, containerid) {
+                        if (typeof FileReader !== "undefined") {
+                            var container = document.getElementById(containerid),
+                            img = document.createElement("img"),
+                            reader;
+                            container.appendChild(img);
+                            reader = new FileReader();
+                            reader.onload = (function (theImg) {
+                                             return function (evt) {
+                                             theImg.src = evt.target.result;
+                                             };
+                                             }(img));
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                    
+                    </script>
+                
+                <a href="#enviada" data-role="button" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Enviar</a>
+                <div data-role="popup" id="enviada" data-overlay-theme="a">
+                    <a href="#main"  data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <h2>Gracias</h2>
+                        <p>Notificación enviada, pronto verificaremos e informaremos a la comunidad<p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div data-role="footer" data-theme="b" class="ui-bar" data-position="fixed" data-id="footer0">
+                <h2>transporTeinforma</h2>
+                <h2>Los Lagos</h2>
+            </div>
+        </div>
+        
+        
+        <div data-role="page" data-theme="d" id="page1" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#" onclick="getMapa()">Estado</a> </li>
+                        <li> <a href="#horarios">Horarios</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center" >
+                <img src="img/Barco.png" alt"Barco" width="90" height="70"/>
+                <h3>Estado de Puertos</h3>
+                <p>En esta sección encontrará el estado actual de los puertos de la X región de Los Lagos<p>
+                <h3>Horarios</h3>
+                <p>Además podrá verificar los itinerarios marítimos de algunas rutas marítimas<p>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer2">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star" class="ui-btn-active ui-state-persist"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="horarios" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#" onclick="getMapa()">Estado</a> </li>
+                        <li> <a href="#horarios" class="ui-btn-active ui-state-persist">Horarios</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <h3>Itinerarios Marítimos</h3>
+                <p>Rutas Navieras Región de Los Lagos<p>
+                
+                <a href="#ruta1" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta Pargua-Chacao</a>
+                <div data-role="popup" id="ruta1" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaParChSep.png" alt"tte" width="100%" height="100%"/>
+                    </div>
+                </div>
+                
+                <a href="#ruta2" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta Chacao-Pargua</a>
+                <div data-role="popup" id="ruta2" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaChParSep.png" alt"ruta2" width="100%" height="100%"/>
+                    </div>
+                </div>
+                
+                <p>Ruta Bi-Modal Tramo 1: La Arena-Puelche/Puelche-La Arena<p>
+                
+                <a href="#ruta3" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta La Arena-Puelche</a>
+                <div data-role="popup" id="ruta3" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaArenaPueSep.png" alt"ruta3" width="100%" height="100%"/>
+                    </div>
+                </div>
+                
+                <a href="#ruta4" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta Puelche-La Arena</a>
+                <div data-role="popup" id="ruta4" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaPueArenaSep.png" alt"ruta4" width="100%" height="100%"/>
+                    </div>
+                </div>
+
+                <p>Ruta Bi-Modal Tramo 2: Hornopirén-Leptepu/Leptepu-Hornopirén<p>
+                <p>Ruta Bi-Modal Tramo 3: Fiordo Largo-Caleta Gonzalo/Caleta Gonzalo-Fiordo Largo<p>
+                
+                <a href="#ruta5" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta Bi-Modal Tramo 2 y 3</a>
+                <div data-role="popup" id="ruta5" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaTramo2y3.png" alt"ruta5" width="100%" height="100%"/>
+                    </div>
+                </div>
+                
+                <p>Ruta Puerto Montt-Ayacara-Chaitén-Castro-Quellón<p>
+                
+                
+                <a href="#ruta6" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta P.Montt-Chaitén</a>
+                <div data-role="popup" id="ruta6" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaPtoChaiSep.png" alt"ruta6" width="100%" height="100%"/>
+                    </div>
+                </div>
+                
+                <a href="#ruta7" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta Chaitén-P.Montt</a>
+                <div data-role="popup" id="ruta7" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaChaiPtoSep.png" alt"ruta7" width="100%" height="100%"/>
+                    </div>
+                </div>
+                
+                <p>Ruta Chaitén-Quellón/Quellón-Chaitén<p>
+                
+                <a href="#ruta8" data-role="button" data-mini="true" data-transition="pop" data-rel="popup" data-position-to="#codeSample" data-transition="flip"> Ruta Chai-Quell-Chai</a>
+                <div data-role="popup" id="ruta8" data-overlay-theme="a">
+                    <a href="#horarios"  data-role="button" data-mini="true" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                    <div align="center">
+                        <img src="img/rutas/RutaChaiQueSep.png" alt"ruta8" width="100%" height="100%"/>
+                    </div>
+                </div>
+                
+                <p>*Itinerarios pueden sufrir cambios<p>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer2">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star" class="ui-btn-active ui-state-persist"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="page2" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#twit">Twitter</a> </li>
+                        <li> <a href="#face">Facebook</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <img src="img/fc5.png" alt"imagenSocial" width="130" height="70"/>
+                <h3>Redes sociales</h3>
+				<p>En esta sección encontrará las redes sociales de transporTeinforma Los Lagos<p>
+            </div>
+            
+            <div data-role="footer" data-theme="b"  data-position="fixed" data-id="footer3">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star" > Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid" class="ui-btn-active ui-state-persist"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info" > Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search" > Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="twit" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#twit" class="ui-btn-active ui-state-persist">Twitter</a> </li>
+                        <li> <a href="#face" >Facebook</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <h3>Twitter</h3>
+                
+                <a class="twitter-timeline" href="https://twitter.com/tteinforma_X" data-widget-id="367857555176841216">Tweets por @tteinforma_X</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b"  data-position="fixed" data-id="footer3">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star" > Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid" class="ui-btn-active ui-state-persist"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info" > Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search" > Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="face" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#twit" >Twitter</a> </li>
+                        <li> <a href="#face" class="ui-btn-active ui-state-persist">Facebook</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <h3>Facebook</h3>
+                
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                         var js, fjs = d.getElementsByTagName(s)[0];
+                         if (d.getElementById(id)) return;
+                         js = d.createElement(s); js.id = id;
+                         js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
+                         fjs.parentNode.insertBefore(js, fjs);
+                         }(document, 'script', 'facebook-jssdk'));</script>
+                
+                <div class="fb-like-box" data-href="https://www.facebook.com/tteinformaLosLagos" data-width="292" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"></div>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b"  data-position="fixed" data-id="footer3">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star" > Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid" class="ui-btn-active ui-state-persist"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info" > Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search" > Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="page3" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#page3" class="ui-btn-active ui-state-persist">Info</a> </li>
+                        <li> <a href="#plan" >Planificador</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <img src="img/plan.png" alt"imagenPlan" width="50" height="70"/>
+                <h3>Planificador de rutas</h3>
+                <p>En esta sección puede planificar rutas para el uso de transporte público dentro de la X región<p>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer4">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info" class="ui-btn-active ui-state-persist"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="plan" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#page3" >Info</a> </li>
+                        <li> <a href="#plan" class="ui-btn-active ui-state-persist">Planificador</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                
+                <iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.loslagos.transporteinforma.cl/servicios_chile/planificador/web/index.php?lang=es&i1=164198&b1=0D2658&b2=0066FF&b3=041735&b=1&lang=es&lg=es"></iframe>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer4">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info" class="ui-btn-active ui-state-persist"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="page4" data-add-back-btn=true data-back-btn-text="A" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#page4" class="ui-btn-active ui-state-persist">Acerca</a> </li>
+                        <li> <a href="#admin" >Admin</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" data-theme="d" align="center">
+                <img src="img/Imagen.png" alt"imagenAcerca" width="70" height="70"/>
+                <h3>Acerca del desarrollador de esta aplicación</h3>
+                <p><a href="http://www.loslagos.transporteinforma.cl" >transporTeinforma Los Lagos</a>  agradece al desarrollador de esta aplicación <a href="http://www.oscarmardones.com" > www.oscarmardones.com </a><p>
+                
+                <a href="#comentarios" data-role="button" data-mini="true" data-transition="flip" data-rel="dialog"> Comentarios</a>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer5">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search" class="ui-btn-active ui-state-persist"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+		<div data-role="page" data-theme="d" id="admin" data-add-back-btn=true data-back-btn-text="A">
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <img src="img/logoHeader.png" alt"tteBann" width="320" height="45"/>
+                <div data-role="navbar"  >
+                    <ul>
+                        <li> <a href="#page4" >Acerca</a> </li>
+                        <li> <a href="#admin"  class="ui-btn-active ui-state-persist">Admin</a> </li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <div data-role="content" data-theme="d">
+                <h2>Administrador</h2>
+                
+                <h3>Acceso restringido</h3>
+                <input type="text" size="15" maxlength="30" value="" name="user" placeholder="Usuario" required pattern="[a-z]{3}[0-9]{3}">
+                    
+                    <input type="password" name="Contraseña" placeholder="contraseña"required>
+                        <a href="#adminpage" data-role="button" data-mini="true"> Ingresar</a>
+                        </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer0">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="alert" > Lista </a> </li>
+                        <li> <a href="#page1" data-icon="star"> Puertos </a> </li>
+                        <li> <a href="#page2" data-icon="grid"> Social </a> </li>
+                        <li> <a href="#page3" data-icon="info"> Plan </a> </li>
+                        <li> <a href="#page4" data-icon="search" class="ui-btn-active ui-state-persist"> Acerca </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="d" id="adminpage">
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <h2>Administrador</h2>
+                <a href="#inicio"  data-icon="home" data-iconpos="right">Inicio</a>
+                <a href="#"  data-icon="delete" data-iconpos="left">Cerrar</a>
+            </div>
+            
+            <div data-role="content" data-theme="d">
+                <h2>Administrador</h2>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer0">
+                <h2>transporTeinforma</h2>
+                <h2>Los Lagos</h2>
+            </div>
+        </div>
+        
+        
+        <div data-role="page" data-theme="d" id="comentarios" >
+            
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <h2>Comentarios</h2>
+                
+            </div>
+            
+            <div data-role="content" data-theme="d">
+                <h3>Ingrese Comentarios</h3>
+                <div data-role="fieldcontain">
+                    <label for="question1">Te gustó esta aplicaciòn? </label>
+                    <Select name="question1" id="question1" data-role="slider" data-theme="a" data-track-theme="c">
+                        <option value="No"> No</option>
+                        <option value="Si"> Si</option>
+                    </select>
+                </div>
+                <h4>Correo:</h4>
+                <input type="email" placeholder="Ingrese Email" name="correo" required>
+                    <h4>Escribanos:</h4>
+                    <textarea name="comentarios" rows="10" cols="40" placeholder="Escriba aquí sus comentarios"></textarea>
+                    <a href="#gracias" data-role="button" data-transition="pop" data-rel="popup"> Enviar</a>
+                    
+                    <div data-role="popup" id="gracias" data-overlay-theme="a">
+                        <a href="#main"  data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="u-btn-right">Cerrar</a>
+                        <div align="center">
+                            <h2>Gracias</h2>
+                            <p>Por enviar sus comentarios<p>
+                        </div>
+                    </div>
+                    </div>
+            
+            <div data-role="footer" data-theme="b" class="ui-bar" data-position="fixed" data-id="footer0">
+                <h2>transporTeinforma</h2>
+                <h2>Los Lagos</h2>
+            </div>
+        </div>
+        
+        
+        
+        
+        <div data-role="page" data-theme="d" id="mainEn" data-add-back-btn=true>
+            
+            <div data-role="header" data-theme="b">
+                <h2>TransporTeinforma</h2>
+                <h2>Los Lagos</h2>
+            </div>
+            
+            <div data-role="content" data-theme="d">
+                <h2>Content</h2>
+                <p>Local Incidents<p>
+                <a href="#" data-role="button" data-transition="pop"> Incidents Map</a>
+                <a href="#" data-role="button" data-transition="pop"> All Incidents </a>
+                
+            </div>
+            
+            <div data-role="footer" data-theme="b" class="ui-bar" data-position="fixed" data-id="footer1">
+                <div data-role="navbar" datatheme="d">
+                    <ul>
+                        <li> <a href="#main" data-icon="arrow-l" class="ui-btn-active"> List </a> </li>
+                        <li> <a href="#" data-icon="arrow-l"> Map </a> </li>
+                        <li> <a href="#" data-icon="arrow-l"> All </a> </li>
+                        <li> <a href="#" data-icon="arrow-l"> Notify </a> </li>
+                        <li> <a href="#" data-icon="arrow-l" data-iconpos="notext"> About </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+    </body>
+</html>
